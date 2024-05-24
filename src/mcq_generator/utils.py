@@ -24,15 +24,13 @@ def read_file(file):
             "unsupported file format only pdf and text file  supported"
         )
 
-
 def get_table_data(quiz_str):
-    try:
-        quiz_dict = json.loads(quiz_str)
-        quiz_table_data = []
+    quiz_dict = json.loads(quiz_str)
+    quiz_table_data = []
 
-        for key, value in quiz_dict.items():
+    for key, value in quiz_dict.items():
             mcq = value["mcq"]
-            options = " || ".json(
+            options = " || ".join(
                 [
                     f"{option}-> {option_value}" for option, option_value in value["options"].items()
                 ]
@@ -41,7 +39,6 @@ def get_table_data(quiz_str):
             correct = value["correct"]
             quiz_table_data.append(
                 {"MCQ": mcq, "Choices": options, "Correct": correct})
-        return quiz_table_data
+    return quiz_table_data
 
-    except Exception as e:
-        raise Exception("SOMETHING WENT WRONG")
+    
